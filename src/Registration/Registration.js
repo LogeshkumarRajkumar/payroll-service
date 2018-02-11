@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Registration.css';
-import { Button, FormControl, FormGroup, Label } from 'react-bootstrap';
+import { Button, FormControl, Label } from 'react-bootstrap';
 import axios from 'axios';
 
 class Register extends  Component {

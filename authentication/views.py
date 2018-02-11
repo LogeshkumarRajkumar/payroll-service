@@ -1,6 +1,5 @@
 import sys
 sys.path.append('..')
-from rest_framework import generics
 from .serializers import CompanySerializer
 from .models import Company
 from rest_framework.views import APIView

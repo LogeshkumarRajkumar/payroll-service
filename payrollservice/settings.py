@@ -56,8 +56,10 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
 )
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_NAME = 'csrftoken'
+
 #
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -73,9 +75,7 @@ ROOT_URLCONF = 'payrollservice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-             os.path.join(BASE_DIR, 'build')
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,14 +135,15 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images
+# Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
-ALLOWED_HOSTS = ['simplpayroll.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, "static"),

@@ -21,7 +21,7 @@ from . import views
 from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
-    url('.*', TemplateView.as_view(template_name='index.html')),
     url('authentication/', include('authentication.urls')),
+    url('.*', TemplateView.as_view(template_name='index.html')),
     url('admin/', admin.site.urls),
 ]
