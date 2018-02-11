@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+
 from . import views
+from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', get_schema_view(), name='index'),
     url('authentication/', include('authentication.urls')),
     url('admin/', admin.site.urls),
 ]

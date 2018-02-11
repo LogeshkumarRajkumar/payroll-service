@@ -1,0 +1,41 @@
+.Register {
+  text-align: center;
+  border: 1px green solid;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 8%;
+  padding-bottom: 8%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 7%;
+  border-radius: 5%;
+  background: #b8f5d4;
+}
+
+.label {
+    color: green;
+    font-weight: bolder;
+    font-family: fantasy;
+}
+
+.form-control {
+ margin-top: 5px;
+ margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 4%;
+}
+
+.error {
+  color: red;
+  font-weight: bolder;
+  font-family: fantasy;
+}
+
+.success {
+  margin-top: 2%;
+  color: green;
+  font-weight: bolder;
+  font-family: fantasy;
+}
