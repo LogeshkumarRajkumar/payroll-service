@@ -32,7 +32,8 @@ class Register extends  Component {
       name: this.state.company_name,
       creator: { email: this.state.email,
                  first_name: this.state.first_name,
-                 last_name: this.state.last_name
+                 last_name: this.state.last_name,
+                 password: this.textInput.value
                }
       })
       .then(response => {
@@ -65,12 +66,17 @@ class Register extends  Component {
             <Label className="label"> Company Name </Label>
             <FormControl onChange={this.handleChange} name="company_name" className="form-control" placeholder="Enter your organisation name.."></FormControl>
          </div>
+         <div>
+            <Label className="label"> Password </Label>
+            <FormControl inputRef={input => this.textInput = input}
+                id="Password" label="Password" type="password" className="form-control" placeholder="Strong password please!"/>
+         </div>
          <Button onClick={this.onSubmit} className="button" bsStyle="success">Register</Button>
          <div>
-                  <Label className="error">{this.state.error_message}</Label>
+             <Label className="error">{this.state.error_message}</Label>
          </div>
          <div>
-                  <Label className="success">{this.state.success_message}</Label>
+              <Label className="success">{this.state.success_message}</Label>
          </div>
       </div>
     </div>

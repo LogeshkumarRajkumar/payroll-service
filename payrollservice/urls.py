@@ -16,12 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
+from rest_framework_jwt.views import obtain_jwt_token
 
 from . import views
 from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
-    url('authentication/', include('authentication.urls')),
-    url('.*', TemplateView.as_view(template_name='index.html')),
     url('admin/', admin.site.urls),
+
+    url('authentication/', include('authentication.urls')),
+    url('api/auth/token', obtain_jwt_token),
+    url('.*', TemplateView.as_view(template_name='index.html')),
+    url('company/', include('company.urls'))
 ]

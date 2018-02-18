@@ -1,12 +1,14 @@
-#from ..company.models import Company
+# from ..company.models import Company
 from rest_framework import serializers
 from .models import User, Company
-from django.conf import settings
+import uuid
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name', 'password')
+
 
 class CompanySerializer(serializers.ModelSerializer):
     creator = UserSerializer()
@@ -17,7 +19,9 @@ class CompanySerializer(serializers.ModelSerializer):
 
     def create(self, data):
         user_data = data.pop('creator')
-        user = User.objects.create_superuser(**user_data)
-        print('creator', data)
-        company = Company.objects.create(creator=user, **data)
-        return company
+        user_id = 'user-' + str(uuid.uuid4());
+        user = User.objects.create_superuser(id=user_id, **user_data)
+
+        company_id = 'comp-' + str(uuid.uuid4());
+        company = Company.objects.create(id=company_id, creator=user, **data)
+        return {'success': 'true'}
