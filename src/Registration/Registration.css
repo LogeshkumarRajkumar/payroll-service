@@ -11,6 +11,10 @@
   border-radius: 5%;
   background: #b8f5d4;
 }
+.test {
+display: flex;
+padding-left: 40px;
+}
 
 .label {
     color: green;
