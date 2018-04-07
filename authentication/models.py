@@ -12,10 +12,10 @@ from .managers import UserManager
 import uuid
 
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.CharField(max_length=30, primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(max_length=20000, primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first name'), max_length=20000, blank=True)
+    last_name = models.CharField(_('last name'), max_length=20000, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_active = models.BooleanField(_('active'), default=True)
     jwt_secret = models.UUIDField(default=uuid.uuid4)
