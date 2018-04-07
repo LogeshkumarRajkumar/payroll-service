@@ -23,6 +23,6 @@ urlpatterns = [
 
     url('authentication/', include('authentication.urls')),
     url('api/auth/token', obtain_jwt_token),
-    url('.*', TemplateView.as_view(template_name='index.html')),
+    # url('.*', TemplateView.as_view(template_name='index.html')),
     url('company/', include('company.urls'))
 ]
