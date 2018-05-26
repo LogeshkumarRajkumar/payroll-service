@@ -29,9 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'Users.User'
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'authentication',
-    'company'
+    'Users',
+    'Companies'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +76,7 @@ REST_FRAMEWORK = {
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=15),
-    'JWT_GET_USER_SECRET_KEY': 'authentication.models.jwt_get_secret_key'
+    'JWT_GET_USER_SECRET_KEY': 'Users.models.jwt_get_secret_key'
 }
 
 ROOT_URLCONF = 'payrollservice.urls'
@@ -167,6 +167,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True

@@ -1,6 +1,7 @@
-# from ..company.models import Company
+# from ..Companies.models import Company
 from rest_framework import serializers
-from .models import User, Company
+from .models import User
+from Companies.models import Company
 import uuid
 
 

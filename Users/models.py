@@ -6,8 +6,6 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
-
 from .managers import UserManager
 import uuid
 
@@ -47,12 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-class Company(models.Model):
-    id = models.CharField(max_length=20000, primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=20000)
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
 
 def jwt_get_secret_key(user_model):
     return user_model.jwt_secret
