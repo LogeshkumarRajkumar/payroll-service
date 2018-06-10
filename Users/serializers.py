@@ -1,4 +1,4 @@
-# from ..Companies.models import Company
+# from ..Companies.models import Companies
 from rest_framework import serializers
 from .models import User
 from Companies.models import Company
@@ -24,5 +24,5 @@ class CompanySerializer(serializers.ModelSerializer):
         user = User.objects.create_superuser(id=user_id, **user_data)
 
         company_id = 'comp-' + str(uuid.uuid4());
-        company = Company.objects.create(id=company_id, creator=user, **data)
+        Company.objects.create(id=company_id, creator=user, **data)
         return {'success': 'true'}
