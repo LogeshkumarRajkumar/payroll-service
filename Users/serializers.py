@@ -25,4 +25,4 @@ class CompanySerializer(serializers.ModelSerializer):
 
         company_id = 'comp-' + str(uuid.uuid4());
         Company.objects.create(id=company_id, creator=user, **data)
-        return {'success': 'true'}
+        return {'success': 'true', 'comp-id': company_id}
