@@ -17,7 +17,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EmployeeType
-        fields = ('name', 'wageDetails')
+        fields = ('name', 'salaried', 'wageDetails')
 
     def validate_time(self, startTime, endTime):
         if endTime < startTime:
@@ -31,18 +31,17 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return {'success': 'false'}
 
         wageDetails = data['wageDetails']
-        for wageDetail in wageDetails:
-            isvalid = self.validate_time(wageDetail['startTime'], wageDetail['endTime'])
-            if not isvalid:
-                return {'success': 'false',
-                        'validation_error': 'Invalid Start Time and End Time'}
+        if data['salaried'] is True:
+            for wageDetail in wageDetails:
+                isvalid = self.validate_time(wageDetail['startTime'], wageDetail['endTime'])
+                if not isvalid:
+                    return {'success': 'false',
+                            'validation_error': 'Invalid Start Time and End Time'}
 
-        employeeType = EmployeeType.objects.create(name=data['name'], company=company)
+        employeeType = EmployeeType.objects.create(name=data['name'], company=company, salaried=data['salaried'])
 
-        for wageDetail in wageDetails:
-            EmployeeTypeDetails.objects.create(employeeType=employeeType, startTime=wageDetail['startTime'],
-                                               endTime=wageDetail['endTime'])
+        if data['salaried'] is not True:
+            for wageDetail in wageDetails:
+                EmployeeTypeDetails.objects.create(employeeType=employeeType, startTime=wageDetail['startTime'],
+                                                   endTime=wageDetail['endTime'])
         return {'success': 'true'}
-
-
-

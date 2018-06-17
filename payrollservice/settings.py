@@ -76,8 +76,8 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=15),
-    'JWT_GET_USER_SECRET_KEY': 'Users.models.jwt_get_secret_key'
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(minutes=60),
+    'JWT_GET_USER_SECRET_KEY': 'Users.models.jwt_get_secret_key',
 }
 
 ROOT_URLCONF = 'payrollservice.urls'
