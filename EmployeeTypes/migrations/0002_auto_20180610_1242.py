@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Employees', '0001_initial'),
+        ('EmployeeTypes', '0001_initial'),
     ]
 
     operations = [

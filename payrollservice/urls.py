@@ -21,5 +21,7 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url('users/', include('Users.urls')),
     url('companies/', include('Companies.urls')),
+    url('clients/', include('Clients.urls')),
+    url('employee-types/', include('EmployeeTypes.urls')),
     url('token', obtain_jwt_token),
 ]
