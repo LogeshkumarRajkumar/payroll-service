@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'Users',
     'Companies',
-    'EmployeeTypes',
+    'Employees',
     'Clients'
 ]
 

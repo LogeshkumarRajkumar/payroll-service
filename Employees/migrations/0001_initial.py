@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('startTime', models.IntegerField()),
                 ('endTime', models.IntegerField()),
                 ('wageMultiple', models.FloatField(default=1, max_length=4)),
-                ('employeeType', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='EmployeeTypes.EmployeeType')),
+                ('employeeType', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Employees.EmployeeType')),
             ],
         ),
     ]
