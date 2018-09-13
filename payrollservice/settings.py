@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'Companies',
     'Employees',
     'Clients',
-    'rest_framework_swagger'
+    'rest_framework_docs',
 ]
 
 MIDDLEWARE = [
