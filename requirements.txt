@@ -20,6 +20,7 @@ gunicorn==19.7.1
 idna==2.6
 itypes==1.1.0
 Jinja2==2.10
+django-rest-swagger==2.2.0
 jmespath==0.9.3
 macholib==1.5.1
 MarkupSafe==1.0
