@@ -25,3 +25,8 @@ class ClientSerializer(serializers.ModelSerializer):
         clientId = 'client-' + str(uuid.uuid4());
         Client.objects.create(id=clientId, name=data['name'], company=company)
         return {'success': 'true', 'client-id': clientId}
+
+    def update(self, data):
+        Client.objects.update(id, data)
+        return True
+
