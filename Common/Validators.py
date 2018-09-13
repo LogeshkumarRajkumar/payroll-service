@@ -15,6 +15,6 @@ def validate_alpha_numeric(value):
     """
     Let's validate the email passed is in the domain "yourdomain.com"
     """
-    if not re.match(r'^[0-9a-zA-Z]*$', value):
+    if not re.match(r'^[0-9a-zA-Z ]*$', value):
         raise ValidationError(
             "Sorry, Input should contain only [a-z][A-Z][0-9] (alphanumeric characters) only.")

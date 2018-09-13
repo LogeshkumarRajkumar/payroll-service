@@ -6,6 +6,19 @@ from django.core.exceptions import ValidationError
 import uuid
 
 
+class WageListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EmployeeTypeDetails
+        fields = ('startTime', 'endTime', 'wageMultiple')
+
+
+class EmployeeListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EmployeeType
+        fields = ('id','name', 'salaried')
+
+
 class WageSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeTypeDetails

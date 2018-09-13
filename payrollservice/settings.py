@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'Users',
     'Companies',
     'Employees',
-    'Clients'
+    'Clients',
+    'rest_framework_swagger'
 ]
 
 MIDDLEWARE = [

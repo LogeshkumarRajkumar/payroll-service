@@ -4,6 +4,10 @@ from rest_framework import serializers
 from Clients.models import Client
 from Companies.models import Company
 
+class ClientListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = "__all__"
 
 class ClientSerializer(serializers.ModelSerializer):
 
@@ -13,12 +17,16 @@ class ClientSerializer(serializers.ModelSerializer):
 
     def create(self, data):
         company_id = data['company_id']
-        print('here')
         company = Company.objects.get(pk=company_id)
+        print(company.name)
         if not company:
             return {'success': 'false'}
 
         clientId = 'client-' + str(uuid.uuid4());
         Client.objects.create(id=clientId, name=data['name'], company=company)
         return {'success': 'true', 'client-id': clientId}
+
+    def update(self, data):
+        Client.objects.update(id, data)
+        return True
 
