@@ -16,7 +16,7 @@ class EmployeeListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EmployeeType
-        fields = ('id','name', 'salaried')
+        fields = ('id', 'name', 'salaried',)
 
 
 class WageSerializer(serializers.ModelSerializer):
@@ -44,8 +44,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
             return {'success': 'false'}
 
         wageDetails = data['wageDetails']
+        if not 'salaried' in data:
+            return {'message': 'Salaried flag is mandatory in request'}
+
         if data['salaried'] is True:
-             EmployeeType.objects.create(name=data['name'], company=company, salaried=data['salaried'])
+            EmployeeType.objects.create(name=data['name'], company=company, salaried=data['salaried'])
 
         if data['salaried'] is not True:
             for wageDetail in wageDetails:
