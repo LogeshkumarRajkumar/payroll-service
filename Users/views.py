@@ -23,4 +23,4 @@ class CompanyDetail(APIView):
         if company.is_valid():
             data = company.save()
             return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
-        return Response({"Success": "false", "error": company.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Success": "false", "errorMessage": "Field validation errors", "error": company.errors}, status=status.HTTP_400_BAD_REQUEST)

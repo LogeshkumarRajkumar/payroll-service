@@ -41,4 +41,5 @@ class EmployeeDetails(viewsets.ModelViewSet):
         if employeeType.is_valid():
             data = employeeType.save(company_id=company_id)
             return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
-        return Response({"Success": "false", "error": employeeType.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Success": "false", "errorMessage": "Field validation errors", "error": employeeType.errors},
+                        status=status.HTTP_400_BAD_REQUEST)

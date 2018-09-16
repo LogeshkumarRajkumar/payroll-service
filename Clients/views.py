@@ -33,4 +33,4 @@ class ClientDetails(viewsets.ModelViewSet):
         if client.is_valid():
             data = client.save(company_id=companyid)
             return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
-        return Response({"Success": "false", "error": client.errors}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"Success": "false", "errorMessage": "Field validation errors", "error": client.errors}, status=status.HTTP_400_BAD_REQUEST)
