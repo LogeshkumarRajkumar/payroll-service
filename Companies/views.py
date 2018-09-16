@@ -11,7 +11,6 @@ class CompanyDetail(APIView):
     """
     def get(self, request):
         company_id = getCompanyIdFrom(request)
-        print(company_id)
         company = Company.objects.filter(id=company_id)
         serializer = CompanyListSerializer(company, many=True)
-        return Response(serializer.data[0], status=status.HTTP_200_OK)
+        return Response({"Success": "true", "response": serializer.data[0]}, status=status.HTTP_200_OK)

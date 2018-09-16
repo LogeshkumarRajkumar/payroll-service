@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p(1^)+l!x-w^c@p(ci84vn2nqzlrp@47!6me+*-vk2nxlg4#l9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'Companies',
     'Employees',
     'Clients',
-    'rest_framework_docs',
 ]
 
 MIDDLEWARE = [

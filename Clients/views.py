@@ -12,18 +12,19 @@ class ClientDetails(viewsets.ModelViewSet):
     """
 
     def get(self, request, client_id):
+        print('hioioioioi')
         client = Client.objects.filter(id=client_id)
         if client[0].company_id != getCompanyIdFrom(request):
-            return Response({"Success": "false"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"Success": "false", "error": "Invalid Client"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        serializer = ClientListSerializer(company, many=True)
+        serializer = ClientListSerializer(client, many=True)
         return Response(serializer.data[0], status=status.HTTP_200_OK)
 
     def list(self, request):
         companyid = getCompanyIdFrom(request)
         queryset = Client.objects.filter(company=companyid)
         serializer = ClientListSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"Success": "true", "response": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         companyid = getCompanyIdFrom(request)
@@ -31,18 +32,5 @@ class ClientDetails(viewsets.ModelViewSet):
         print(client)
         if client.is_valid():
             data = client.save(company_id=companyid)
-            return Response(data, status=status.HTTP_201_CREATED)
-        return Response({}, status=status.HTTP_400_BAD_REQUEST)
-
-    def put(self, request, client_id, format=None):
-        client = Client.objects.filter(id=client_id).first()
-        if client.company_id != getCompanyIdFrom(request):
-            return Response({"Success": "false"}, status=status.HTTP_401_UNAUTHORIZED)
-
-        client = ClientSerializer(client, data=request.data)
-        print(client)
-        if client.is_valid():
-            data = client.save()
-            return Response(data, status=status.HTTP_201_CREATED)
-        return Response({}, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
+        return Response({"Success": "false", "error": client.errors}, status=status.HTTP_400_BAD_REQUEST)

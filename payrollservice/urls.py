@@ -24,5 +24,4 @@ urlpatterns = [
     url('clients/', include('Clients.urls')),
     url('employee-types/', include('Employees.urls')),
     url('token', obtain_jwt_token),
-    url(r'^$', include('rest_framework_docs.urls')),
 ]

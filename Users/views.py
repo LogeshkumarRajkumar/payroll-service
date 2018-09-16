@@ -16,11 +16,11 @@ class CompanyDetail(APIView):
     def get(self, request, format=None):
         company = Company.objects.all()
         serializer = CompanySerializer(company, many=True)
-        return Response(serializer.data)
+        return Response({"Success": "true", "response": serializer.data}, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         company = CompanySerializer(data=request.data)
         if company.is_valid():
             data = company.save()
-            return Response(data, status=status.HTTP_201_CREATED)
-        return Response(company.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
+        return Response({"Success": "false", "error": company.errors}, status=status.HTTP_400_BAD_REQUEST)
