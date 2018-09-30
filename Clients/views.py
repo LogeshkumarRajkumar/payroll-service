@@ -12,7 +12,6 @@ class ClientDetails(viewsets.ModelViewSet):
     """
 
     def get(self, request, client_id):
-        print('hioioioioi')
         client = Client.objects.filter(id=client_id)
         if client[0].company_id != getCompanyIdFrom(request):
             return Response({"Success": "false", "error": "Invalid Client"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -33,4 +32,17 @@ class ClientDetails(viewsets.ModelViewSet):
         if client.is_valid():
             data = client.save(company_id=companyid)
             return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
+        return Response({"Success": "false", "errorMessage": "Field validation errors", "error": client.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, client_id, format=None):
+        companyidFromToken = getCompanyIdFrom(request)
+        client = Client.objects.get(id=client_id)
+        if client.company_id != companyidFromToken:
+            return Response({"Success": "false", "error": "Invalid Client"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        serializedData = ClientSerializer(client, data=request.data)
+        print(serializedData)
+        if serializedData.is_valid():
+            data = serializedData.save()
+            return Response({"Success": "true", "response": "updated"}, status=status.HTTP_201_CREATED)
         return Response({"Success": "false", "errorMessage": "Field validation errors", "error": client.errors}, status=status.HTTP_400_BAD_REQUEST)

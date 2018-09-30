@@ -7,7 +7,7 @@ from Companies.models import Company
 class ClientListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = "__all__"
+        fields = ('id', 'name', 'company')
 
 class ClientSerializer(serializers.ModelSerializer):
 
@@ -25,8 +25,3 @@ class ClientSerializer(serializers.ModelSerializer):
         clientId = 'client-' + str(uuid.uuid4());
         Client.objects.create(id=clientId, name=data['name'], company=company)
         return {'success': 'true', 'client-id': clientId}
-
-    def update(self, data):
-        Client.objects.update(id, data)
-        return True
-
