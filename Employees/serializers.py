@@ -62,3 +62,33 @@ class EmployeeSerializer(serializers.ModelSerializer):
                 EmployeeTypeDetails.objects.create(employeeType=employeeType, startTime=wageDetail['startTime'],
                                                    endTime=wageDetail['endTime'])
         return {'success': 'true'}
+
+    def update(self, data, company_id, employeetype_id):
+        company = Company.objects.get(pk=company_id)
+        if not company:
+            return {'success': 'false'}
+
+        EmployeeTypeDetails.objects.filter(employeeType=employeetype_id).delete()
+        EmployeeType.objects.get(id=employeetype_id).delete()
+
+        wageDetails = data['wageDetails']
+        if not 'salaried' in data:
+            return {'message': 'Salaried flag is mandatory in request'}
+
+        if data['salaried'] is False:
+            EmployeeType.objects.create(id=employeetype_id, name=data['name'], company=company, salaried=data['salaried'])
+
+        if data['salaried'] is not True:
+            for wageDetail in wageDetails:
+                isvalid = self.validate_time(wageDetail['startTime'], wageDetail['endTime'])
+                if not isvalid:
+                    return {'success': 'false',
+                            'error': 'Invalid Start Time and End Time'}
+
+            employeeType = EmployeeType.objects.create(id=employeetype_id, name=data['name'], company=company, salaried=data['salaried'])
+            print(employeeType.id)
+            for wageDetail in wageDetails:
+                EmployeeTypeDetails.objects.create(employeeType=employeeType, startTime=wageDetail['startTime'],
+                                                   endTime=wageDetail['endTime'])
+        return {'success': 'true'}
+

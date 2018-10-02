@@ -43,3 +43,14 @@ class EmployeeDetails(viewsets.ModelViewSet):
             return Response({"Success": "true", "response": data}, status=status.HTTP_201_CREATED)
         return Response({"Success": "false", "errorMessage": "Field validation errors", "error": employeeType.errors},
                         status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, employee_typeid, format=None):
+        company_id = getCompanyIdFrom(request)
+        employee = EmployeeType.objects.filter(id=employee_typeid)
+
+        serializedData = EmployeeSerializer(data=request.data)
+        if serializedData.is_valid():
+            data = serializedData.update(data=request.data, company_id=company_id, employeetype_id=employee_typeid)
+            return Response({"Success": "true", "response": "updated"}, status=status.HTTP_201_CREATED)
+        return Response({"Success": "false", "errorMessage": "Field validation errors", "error": serializedData.errors},
+                        status=status.HTTP_400_BAD_REQUEST)
