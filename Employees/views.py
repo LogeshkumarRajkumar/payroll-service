@@ -31,7 +31,7 @@ class EmployeeDetails(viewsets.ModelViewSet):
 
     def list(self, request):
         companyid = getCompanyIdFrom(request)
-        queryset = EmployeeType.objects.filter(company= companyid)
+        queryset = EmployeeType.objects.filter(company=companyid)
         serializer = EmployeeListSerializer(queryset, many=True)
         return Response({"Success": "true", "response": serializer.data}, status=status.HTTP_200_OK)
 
@@ -46,7 +46,9 @@ class EmployeeDetails(viewsets.ModelViewSet):
 
     def put(self, request, employee_typeid, format=None):
         company_id = getCompanyIdFrom(request)
-        employee = EmployeeType.objects.filter(id=employee_typeid)
+        employee = EmployeeType.objects.filter(id=employee_typeid).first()
+        if employee.company_id != getCompanyIdFrom(request):
+            return Response({"Success": "false", "error": "Invalid Employee Type"}, status=status.HTTP_401_UNAUTHORIZED)
 
         serializedData = EmployeeSerializer(data=request.data)
         if serializedData.is_valid():

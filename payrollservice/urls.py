@@ -23,5 +23,6 @@ urlpatterns = [
     url('companies/', include('Companies.urls')),
     url('clients/', include('Clients.urls')),
     url('employee-types/', include('Employees.urls')),
+    url('employees/', include('Employee.urls')),
     url('token', obtain_jwt_token),
 ]
